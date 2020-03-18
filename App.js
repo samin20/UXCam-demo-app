@@ -1,108 +1,58 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { LoggedOutStack } from './src/navRoutes/loggedOutStack';
+import { LoggedInStack } from './src/navRoutes/loggedInStack';
+import { NavigationContainer } from '@react-navigation/native';
+import Splash from './src/screens/splash/Splash';
+import { AuthContext } from './src/helpers/context';
+import { setToken, removeUser, isSignedIn } from './src/helpers';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default () => {
 
-const App: () => React$Node = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState(null);
+
+  const authContext = React.useMemo(() => {
+    return {
+      signIn: async (token) => {
+        setIsLoading(false);
+        await setToken(token);
+        setUserToken(token);
+      },
+      signUp: async (token) => {
+        setIsLoading(false);
+        await setToken(token);
+        setUserToken(token);
+      },
+      signOut: async () => {
+        setIsLoading(false);
+        await removeUser();
+        setUserToken(null);
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    setTimeout(async () => {
+      let userToken;
+      userToken = await isSignedIn();
+      setUserToken(userToken);
+      setIsLoading(false);
+    }, 1000)
+  })
+
+  if (isLoading) {
+    return <Splash />
+  }
+
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-export default App;
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        {userToken ?
+          <LoggedInStack /> : <LoggedOutStack />
+        }
+      </NavigationContainer>
+    </AuthContext.Provider>
+  )
+}
