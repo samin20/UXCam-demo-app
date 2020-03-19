@@ -13,11 +13,13 @@ import { TextInput, Caption, Button, Text } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { MyColors } from '../../config/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 function Login({ navigation }) {
 
     const { signIn } = React.useContext(AuthContext);
 
+    const [showSpinner, setShowSpinner] = useState(false);
     const [inputValues, setInputValues] = useState({
         email: '', password: ''
     });
@@ -28,16 +30,24 @@ function Login({ navigation }) {
 
 
     useEffect(() => {
-        // setTimeout(()=>signIn('fsd'), 1000);
+        
     })
 
     function login() {
         Keyboard.dismiss();
-        console.log(inputValues)
+        console.log(inputValues);
+        setShowSpinner(true);
+        setTimeout(()=>{
+            setShowSpinner(false);
+            signIn('token');
+        }, 2000);
     }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: MyColors.defaultBackground }}>
+            <Spinner
+                visible={showSpinner}
+            />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAvoidingView
                     keyboardVerticalOffset={-250}
