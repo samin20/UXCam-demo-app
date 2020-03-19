@@ -7,12 +7,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import Splash from './src/screens/splash/Splash';
 import { AuthContext } from './src/helpers/context';
 import { setToken, removeUser, isSignedIn } from './src/helpers';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Theme } from './src/config/theme';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export default () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
-
+  const theme = Theme;
   const authContext = React.useMemo(() => {
     return {
       signIn: async (token) => {
@@ -48,11 +51,15 @@ export default () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {userToken ?
-          <LoggedInStack /> : <LoggedOutStack />
-        }
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            {userToken ?
+              <LoggedInStack /> : <LoggedOutStack />
+            }
+          </NavigationContainer>
+        </PaperProvider>
+      </SafeAreaProvider>
     </AuthContext.Provider>
   )
 }

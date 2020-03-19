@@ -4,6 +4,8 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { AuthContext } from '../../helpers/context';
+import Logo from '../../components/Logo';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function Login({ navigation }) {
 
@@ -15,9 +17,9 @@ function Login({ navigation }) {
     })
 
     return (
-        <View style={{ backgroundColor: 'green', flex: 1 }}>
-            
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Logo/>
+        </SafeAreaView>
     );
 
 }
