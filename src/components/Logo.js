@@ -17,7 +17,8 @@ export default Logo = () => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        marginTop: 40
+        marginTop: 40,
+        marginBottom: 30
     },
     chatText: {
         fontSize: 30,

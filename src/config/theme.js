@@ -1,8 +1,10 @@
 import { DefaultTheme } from 'react-native-paper';
 
 export const MyColors = {
-    primaryColor: '#65C47C',
-    accentColor: '#2E3654'
+    primaryColor: '#3559F9',
+    accentColor: '#3559F9',
+    defaultBackground: '#F0F0F0',
+    lightGray: '#B7B7B7'
 }
 
 export const FontSize = {

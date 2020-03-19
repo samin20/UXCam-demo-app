@@ -42,7 +42,7 @@ export default () => {
       userToken = await isSignedIn();
       setUserToken(userToken);
       setIsLoading(false);
-    }, 1000)
+    }, 0)
   })
 
   if (isLoading) {
