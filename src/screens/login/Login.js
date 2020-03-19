@@ -55,6 +55,7 @@ function Login({ navigation }) {
                             }
                         }}
                         mode="outlined"
+                        keyboardType="email-address"
                         style={commonStyles.textInput}
                         label='Email'
                         value={inputValues.email}
