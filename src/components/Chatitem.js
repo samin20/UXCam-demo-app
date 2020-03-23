@@ -39,6 +39,7 @@ export default class ChatItem extends React.Component {
                                     ? 'check-all'
                                     : 'check'}
                             size={15}
+                            style={{marginBottom: 10}}
                             color={item.sent === true ? MyColors.primaryColor : 'gray'} />
                     }
                 </View>
