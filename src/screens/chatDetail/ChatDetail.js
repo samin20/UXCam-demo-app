@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
     View,
     FlatList,
-    SafeAreaView
+    SafeAreaView,
+    Keyboard
 } from 'react-native';
 import styles from './styles';
 import ChatItem from '../../components/Chatitem';
 import { TextInput, IconButton } from 'react-native-paper';
 import { MyColors } from '../../config/theme';
 
-export default function ChatDetail({ route, navigation }) {
+export default function ChatDetail({ route }) {
 
     const myID = 1;
 
     const [conversation, setConversation] = useState([]);
     const [myText, setMyText] = useState('');
+    const [bottomMargin, setBottomMargin] = useState(0);
+    const flatListRef = useRef(null);
 
     useEffect(() => {
         setConversation([
@@ -30,13 +33,43 @@ export default function ChatDetail({ route, navigation }) {
             { id: 9, userID: 1, text: 'Preety sure it is false', time: '10:22 PM', sent: true, isRead: true },
             { id: 10, userID: 0, text: 'Hmmm...', time: '10:22 PM', sent: true, isRead: true }
         ])
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+        return () => {
+            this.keyboardDidShowListener.remove();
+            this.keyboardDidHideListener.remove();
+        }
     }, [])
+
+    function _keyboardDidShow(e) {
+        setBottomMargin(e.endCoordinates.height);
+    }
+
+    function _keyboardDidHide() {
+        setBottomMargin(0);
+    }
+
+    function send() {
+        if (myText.trim() === '') { return }
+        Keyboard.dismiss();
+        let arr = conversation;
+        arr.push({
+            id: Math.random() * (200 - 11) + 11, userID: 1,
+            text: myText,
+            time: new Date().toLocaleTimeString(),
+            sent: true,
+            isRead: false
+        })
+        setMyText('');
+        flatListRef.current.scrollToEnd({ animated: true });
+    }
 
     return (
         <SafeAreaView
             forceInset={{ top: 'never' }}
             style={{ backgroundColor: 'white', flex: 1 }}>
             <FlatList
+                ref={flatListRef}
                 style={{ flex: 1 }}
                 data={conversation}
                 renderItem={({ item, index }) => {
@@ -51,12 +84,12 @@ export default function ChatDetail({ route, navigation }) {
                 }}
                 keyExtractor={item => String(item.id)}
             />
-            <View style={styles.inputContainer}>
+            <View style={[styles.inputContainer, { marginBottom: bottomMargin }]}>
                 <IconButton
                     color={MyColors.primaryColor}
                     icon="image"
                     size={22}
-                    onPress={()=>console.log('open gallery')}
+                    onPress={() => console.log('open gallery')}
                 />
                 <TextInput
                     autoCapitalize="none"
@@ -71,15 +104,21 @@ export default function ChatDetail({ route, navigation }) {
                     selectionColor={MyColors.defaultBackground}
                     keyboardType="ascii-capable"
                     style={styles.input}
-                    label='Your message...'
+                    placeholder='Your message...'
                     value={myText}
                     onChangeText={text => setMyText(text)}
                 />
                 <IconButton
                     color={MyColors.primaryColor}
+                    icon="send"
+                    size={22}
+                    onPress={send}
+                />
+                <IconButton
+                    color={MyColors.primaryColor}
                     icon="thumb-up"
                     size={22}
-                    onPress={()=>console.log('like')}
+                    onPress={() => console.log('like')}
                 />
             </View>
         </SafeAreaView>
