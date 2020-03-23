@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home/Home';
-import Contacts from '../screens/contacts/contacts';
+import Contacts from '../screens/contacts/Contacts';
 import Profile from '../screens/profile/profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MyColors } from '../config/theme';

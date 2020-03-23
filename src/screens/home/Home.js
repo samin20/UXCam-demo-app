@@ -36,7 +36,11 @@ function Home({ navigation }) {
     }, [])
 
     function goToDetail(item){
-        console.log(item);
+        navigation.navigate('ChatDetail', {
+            id: item.id,
+            name: item.name,
+            image: item.image
+        })
     }
 
     return (
