@@ -8,6 +8,7 @@ const Stack = createStackNavigator();
 export function LoggedInStack() {
     return (
         <Stack.Navigator
+            initialRouteName="Home"
             screenOptions={{ headerTintColor: 'black' }}
         >
             <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeTab} />

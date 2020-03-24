@@ -23,12 +23,12 @@ function Contacts({ navigation }) {
     useEffect(() => {
         this.userList = require('../../assets/contacts.json');
         setContactList(require('../../assets/contacts.json'));
-    },[])
+    }, [])
 
-    function search(query){
+    function search(query) {
         setSearchText(query)
-        const filter = userList.filter(obj=> {
-            if(obj.name.toLowerCase().includes(query.toLowerCase())) {
+        const filter = userList.filter(obj => {
+            if (obj.name.toLowerCase().includes(query.toLowerCase())) {
                 return obj;
             }
         })
@@ -52,7 +52,7 @@ function Contacts({ navigation }) {
                             item={item}
                             image={images[getRandomInt(4)]}
                             isOnline={onlineIDs.includes(item.id)}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('ContactModal')}
                         />
                     )
                 }}

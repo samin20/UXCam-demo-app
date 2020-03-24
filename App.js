@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 
 import React from 'react';
 import { LoggedOutStack } from './src/navRoutes/loggedOutStack';
-import { LoggedInStack } from './src/navRoutes/loggedInStack';
 import { NavigationContainer } from '@react-navigation/native';
 import Splash from './src/screens/splash/Splash';
 import { AuthContext } from './src/helpers/context';
@@ -10,6 +9,7 @@ import { setToken, removeUser, isSignedIn } from './src/helpers';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Theme } from './src/config/theme';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { MainModal } from './src/navRoutes/modalStack';
 
 export default () => {
 
@@ -55,7 +55,7 @@ export default () => {
         <PaperProvider theme={theme}>
           <NavigationContainer>
             {userToken ?
-              <LoggedInStack /> : <LoggedOutStack />
+              <MainModal /> : <LoggedOutStack />
             }
           </NavigationContainer>
         </PaperProvider>

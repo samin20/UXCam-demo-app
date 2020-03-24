@@ -5,11 +5,11 @@ import Register from '../screens/register/Register';
 
 const Stack = createStackNavigator();
 
-export function LoggedOutStack(){
+export function LoggedOutStack() {
     return (
         <Stack.Navigator headerMode="none">
-            <Stack.Screen name= "Login" component={Login}/>
-            <Stack.Screen name= "Register" component={Register}/>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
     )
 }
