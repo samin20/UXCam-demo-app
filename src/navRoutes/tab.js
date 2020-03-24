@@ -20,7 +20,13 @@ const ConversationStack = () => {
 const ContactsStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name= "Contacts" component={Contacts}/>
+            <Stack.Screen
+            options={{headerStyle: {
+                elevation: 0,
+                borderBottomWidth: 0,
+                shadowOpacity: 0
+            }}}
+            name= "Contacts" component={Contacts}/>
         </Stack.Navigator>
     )
 }
