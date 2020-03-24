@@ -102,7 +102,6 @@ export default function ChatDetail({ route }) {
                     }}
                     mode="outlined"
                     selectionColor={MyColors.defaultBackground}
-                    keyboardType="ascii-capable"
                     style={styles.input}
                     placeholder='Your message...'
                     value={myText}

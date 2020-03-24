@@ -8,6 +8,7 @@ import { Text } from 'react-native-paper';
 import { MyColors } from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
 
 export default class ConversationItem extends React.Component {
     render() {
@@ -36,6 +37,12 @@ export default class ConversationItem extends React.Component {
             </TouchableWithoutFeedback>
         );
     }
+}
+
+ConversationItem.propTypes = {
+    item: PropTypes.object.isRequired,
+    onPress: PropTypes.func.isRequired,
+    isOnline: PropTypes.bool.isRequired
 }
 
 const styles = StyleSheet.create({

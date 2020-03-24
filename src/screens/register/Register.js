@@ -9,7 +9,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Text, TextInput, Button, Caption } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import InAppBrowser from 'react-native-inappbrowser-reborn'
 
 function Register({ navigation }) {
 
@@ -26,14 +25,15 @@ function Register({ navigation }) {
         console.log(inputValues)
     }
 
-    async function openTerms() {
-        try {
-            if (await InAppBrowser.isAvailable()) {
-                await InAppBrowser.open("https://help.uxcam.com/hc/en-us/articles/360004117372")
-            }
-            else Linking.openURL(url)
-        } catch (error) {
-        }
+    function openTerms() {
+        const url = "https://help.uxcam.com/hc/en-us/articles/360004117372";
+        Linking.canOpenURL(url)
+            .then(supported => {
+                if (supported) {
+                    Linking.openURL(url);
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -130,9 +130,9 @@ function Register({ navigation }) {
                         onPress={register}>
                         Sign up
                     </Button>
-                    <View style={[styles.bottomContainer, {marginTop: 30}]}>
+                    <View style={[styles.bottomContainer, { marginTop: 30 }]}>
                         <Caption>Already have an account:</Caption>
-                        <TouchableOpacity onPress={()=>navigation.goBack()}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
                             <Text style={styles.signup}> Login</Text>
                         </TouchableOpacity>
                     </View>

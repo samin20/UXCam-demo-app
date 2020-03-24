@@ -8,6 +8,7 @@ import {
 import { Text } from 'react-native-paper';
 import { MyColors, FontSize } from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PropTypes from 'prop-types';
 
 export default class ChatItem extends React.Component {
     render() {
@@ -46,6 +47,13 @@ export default class ChatItem extends React.Component {
             </View>
         );
     }
+}
+
+ChatItem.propTypes = {
+    item: PropTypes.object.isRequired,
+    myID: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    isLast: PropTypes.bool.isRequired
 }
 
 const width = Dimensions.get('window').width;
