@@ -3,7 +3,8 @@ import {
     View,
     FlatList,
     SafeAreaView,
-    Keyboard
+    Keyboard,
+    Platform
 } from 'react-native';
 import styles from './styles';
 import ChatItem from '../../components/Chatitem';
@@ -43,7 +44,9 @@ export default function ChatDetail({ route }) {
     }, []) //Only runs once at component mount
 
     function _keyboardDidShow(e) {
-        setBottomMargin(e.endCoordinates.height);
+        if(Platform.OS === 'ios'){
+            setBottomMargin(e.endCoordinates.height);
+        }
     }
 
     function _keyboardDidHide() {
