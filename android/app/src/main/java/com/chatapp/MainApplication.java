@@ -1,4 +1,4 @@
-package com.uxchat;
+package com.chatapp;
 
 import android.app.Application;
 import android.content.Context;
