@@ -6,6 +6,7 @@ import Profile from '../screens/profile/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MyColors } from '../config/theme';
 import { createStackNavigator } from '@react-navigation/stack';
+import { IconButton } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,13 @@ const ContactsStack = () => {
                         elevation: 0,
                         borderBottomWidth: 0,
                         shadowOpacity: 0
-                    }
+                    },
+                    headerRight: () => (
+                        <IconButton
+                            icon="account-plus-outline"
+                            onPress={() => console.log('add new contact')}
+                        />
+                    )
                 }}
                 name="Contacts" component={Contacts} />
         </Stack.Navigator>
@@ -42,7 +49,14 @@ const ProfileStack = () => {
                         elevation: 0,
                         borderBottomWidth: 0,
                         shadowOpacity: 0
-                    }
+                    },
+                    title: "",
+                    headerRight: () => (
+                        <IconButton
+                            icon="square-edit-outline"
+                            onPress={() => console.log('edit profile')}
+                        />
+                    )
                 }}
                 name="Profile" component={Profile} />
         </Stack.Navigator>
