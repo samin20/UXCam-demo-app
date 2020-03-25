@@ -15,7 +15,11 @@ export function MainModal() {
                 component={LoggedInStack}
                 options={{ headerShown: false }}
             />
-            <Stack.Screen options={{ headerShown: false }} name="ContactModal" component={ContactDetail} />
+            <Stack.Screen
+                initialParams={{ name: '', image: '' }}
+                options={{ headerShown: false }}
+                name="ContactModal"
+                component={ContactDetail} />
         </Stack.Navigator>
     )
 }

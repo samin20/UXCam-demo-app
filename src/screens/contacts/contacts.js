@@ -52,7 +52,10 @@ function Contacts({ navigation }) {
                             item={item}
                             image={images[getRandomInt(4)]}
                             isOnline={onlineIDs.includes(item.id)}
-                            onPress={() => navigation.navigate('ContactModal')}
+                            onPress={() => navigation.navigate('ContactModal', {
+                                name: item.name,
+                                image: images[getRandomInt(4)]
+                            })}
                         />
                     )
                 }}
