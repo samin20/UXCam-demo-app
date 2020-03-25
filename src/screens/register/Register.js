@@ -9,23 +9,34 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Text, TextInput, Button, Caption } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AuthContext } from '../../helpers';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 function Register({ navigation }) {
 
+    const { signIn } = React.useContext(AuthContext);
+
+    const [showSpinner, setShowSpinner] = useState(false);
     const [inputValues, setInputValues] = useState({
         username: '', phone: '', email: '', password: '', confirmPassword: ''
     });
 
-    const handleOnChange = (key, value) => {
+    const _handleOnChange = (key, value) => {
         setInputValues({ ...inputValues, [key]: value });
     };
 
-    function register() {
+    function _register() {
         Keyboard.dismiss();
         console.log(inputValues)
+        setShowSpinner(true);
+        setTimeout(() => {
+            setShowSpinner(false);
+            signIn('token'); //save token and change stack to logged in
+        }, 2000);
     }
 
-    function openTerms() {
+    //opens url in external default browser
+    function _openTerms() {
         const url = "https://help.uxcam.com/hc/en-us/articles/360004117372";
         Linking.canOpenURL(url)
             .then(supported => {
@@ -38,6 +49,9 @@ function Register({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: MyColors.defaultBackground }}>
+            <Spinner
+                visible={showSpinner}
+            />
             <KeyboardAwareScrollView
                 keyboardShouldPersistTaps='handled'
             >
@@ -55,7 +69,7 @@ function Register({ navigation }) {
                         style={commonStyles.textInput}
                         label='Username'
                         value={inputValues.username}
-                        onChangeText={text => handleOnChange('username', text)}
+                        onChangeText={text => _handleOnChange('username', text)}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -70,7 +84,7 @@ function Register({ navigation }) {
                         style={commonStyles.textInput}
                         label='Email'
                         value={inputValues.email}
-                        onChangeText={text => handleOnChange('email', text)}
+                        onChangeText={text => _handleOnChange('email', text)}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -85,7 +99,7 @@ function Register({ navigation }) {
                         style={commonStyles.textInput}
                         label='Phone'
                         value={inputValues.phone}
-                        onChangeText={text => handleOnChange('phone', text)}
+                        onChangeText={text => _handleOnChange('phone', text)}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -100,7 +114,7 @@ function Register({ navigation }) {
                         label='Password'
                         value={inputValues.password}
                         secureTextEntry={true}
-                        onChangeText={text => handleOnChange('password', text)}
+                        onChangeText={text => _handleOnChange('password', text)}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -115,11 +129,11 @@ function Register({ navigation }) {
                         label='Confirm password'
                         value={inputValues.confirmPassword}
                         secureTextEntry={true}
-                        onChangeText={text => handleOnChange('confirmPassword', text)}
+                        onChangeText={text => _handleOnChange('confirmPassword', text)}
                     />
                     <View style={styles.bottomContainer}>
                         <Caption>By signing up, you agree with our</Caption>
-                        <TouchableOpacity onPress={openTerms}>
+                        <TouchableOpacity onPress={_openTerms}>
                             <Text style={styles.signup}> terms & conditions</Text>
                         </TouchableOpacity>
                     </View>
@@ -127,7 +141,7 @@ function Register({ navigation }) {
                         theme={{ roundness: 20 }}
                         style={{ marginTop: 20 }}
                         mode="contained"
-                        onPress={register}>
+                        onPress={_register}>
                         Sign up
                     </Button>
                     <View style={[styles.bottomContainer, { marginTop: 30 }]}>

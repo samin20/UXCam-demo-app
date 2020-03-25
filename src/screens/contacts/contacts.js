@@ -3,7 +3,6 @@ import {
     View,
     FlatList
 } from 'react-native';
-import styles from './styles';
 import { Searchbar, Divider } from 'react-native-paper';
 import ContactItem from '../../components/ContactItem';
 import { getRandomInt } from '../../helpers/random';
@@ -12,7 +11,8 @@ function Contacts({ navigation }) {
 
     const [searchText, setSearchText] = useState('');
     const [contactList, setContactList] = useState([]);
-    const onlineIDs = [1, 4, 6, 8, 9, 15];
+
+    const onlineIDs = [1, 4, 6, 8, 9, 15]; //currently online user ids
     const images = [
         'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?crop=entropy&cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fit=crop&fm=jpg&h=959&w=640',
         'https://images.pexels.com/photos/3782179/pexels-photo-3782179.jpeg?crop=entropy&cs=srgb&dl=man-in-denim-jacket-is-smiling-3782179.jpg&fit=crop&fm=jpg&h=426&w=640',
@@ -21,12 +21,14 @@ function Contacts({ navigation }) {
     ]
 
     useEffect(() => {
+        //load contact json from external file
         this.userList = require('../../assets/contacts.json');
         setContactList(require('../../assets/contacts.json'));
-    }, [])
+    }, []) //Only runs once at component mount
 
-    function search(query) {
+    function _search(query) {
         setSearchText(query)
+        //filter list for search query
         const filter = userList.filter(obj => {
             if (obj.name.toLowerCase().includes(query.toLowerCase())) {
                 return obj;
@@ -40,7 +42,7 @@ function Contacts({ navigation }) {
             <Searchbar
                 style={{ marginHorizontal: 20, backgroundColor: '#DCDCDC', borderRadius: 20 }}
                 placeholder="Search user..."
-                onChangeText={query => search(query)}
+                onChangeText={query => _search(query)}
                 value={searchText}
             />
             <FlatList

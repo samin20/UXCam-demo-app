@@ -3,7 +3,6 @@ import {
     View,
     FlatList
 } from 'react-native';
-import styles from './styles';
 import ConversationItem from '../../components/ConversationItem';
 import { getRandomInt, getRandomBool } from '../../helpers/random';
 import { Divider } from 'react-native-paper';
@@ -33,9 +32,9 @@ function Home({ navigation }) {
                 isRead: getRandomBool()
             })
         }
-    }, [])
+    }, []) //Only runs once at component mount
 
-    function goToDetail(item){
+    function _goToDetail(item){
         navigation.navigate('ChatDetail', {
             id: item.id,
             name: item.name,
@@ -50,7 +49,7 @@ function Home({ navigation }) {
                 renderItem={({ item }) => {
                     return (
                         <ConversationItem
-                            onPress={()=>goToDetail(item)}
+                            onPress={()=>_goToDetail(item)}
                             item={item}
                             isOnline={online.includes(item.name)} />
                     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     TouchableWithoutFeedback,
@@ -24,22 +24,17 @@ function Login({ navigation }) {
         email: '', password: ''
     });
 
-    const handleOnChange = (key, value) => {
+    const _handleOnChange = (key, value) => {
         setInputValues({ ...inputValues, [key]: value });
     };
 
-
-    useEffect(() => {
-        
-    })
-
-    function login() {
+    function _login() {
         Keyboard.dismiss();
         console.log(inputValues);
         setShowSpinner(true);
         setTimeout(()=>{
             setShowSpinner(false);
-            signIn('token');
+            signIn('token'); //save token and change stack to logged in
         }, 2000);
     }
 
@@ -69,7 +64,7 @@ function Login({ navigation }) {
                         style={commonStyles.textInput}
                         label='Email'
                         value={inputValues.email}
-                        onChangeText={text => handleOnChange('email', text)}
+                        onChangeText={text => _handleOnChange('email', text)}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -85,13 +80,13 @@ function Login({ navigation }) {
                         label='Password'
                         value={inputValues.password}
                         value={inputValues.password}
-                        onChangeText={text => handleOnChange('password', text)}
+                        onChangeText={text => _handleOnChange('password', text)}
                     />
                     <Button
                         theme={{ roundness: 20 }}
                         style={{ marginTop: 30 }}
                         mode="contained"
-                        onPress={login}>
+                        onPress={_login}>
                         Login
                     </Button>
                     <View style={styles.bottomContainer}>

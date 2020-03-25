@@ -49,6 +49,7 @@ export default class ChatItem extends React.Component {
     }
 }
 
+//Props that can used with this component....Not required but brings more clarity
 ChatItem.propTypes = {
     item: PropTypes.object.isRequired,
     myID: PropTypes.number.isRequired,

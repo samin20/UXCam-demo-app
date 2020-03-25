@@ -35,11 +35,12 @@ export default function ChatDetail({ route }) {
         ])
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+        //clear listener on component unmount
         return () => {
             this.keyboardDidShowListener.remove();
             this.keyboardDidHideListener.remove();
         }
-    }, [])
+    }, []) //Only runs once at component mount
 
     function _keyboardDidShow(e) {
         setBottomMargin(e.endCoordinates.height);
@@ -49,7 +50,7 @@ export default function ChatDetail({ route }) {
         setBottomMargin(0);
     }
 
-    function send() {
+    function _send() {
         if (myText.trim() === '') { return }
         Keyboard.dismiss();
         let arr = conversation;
@@ -111,7 +112,7 @@ export default function ChatDetail({ route }) {
                     color={MyColors.primaryColor}
                     icon="send"
                     size={22}
-                    onPress={send}
+                    onPress={_send}
                 />
                 <IconButton
                     color={MyColors.primaryColor}

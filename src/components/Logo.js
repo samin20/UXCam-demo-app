@@ -4,7 +4,6 @@ import {
     StyleSheet
 } from 'react-native';
 import { Text } from 'react-native-paper';
-import { FontSize } from '../config/theme';
 
 export default Logo = () => {
     return (

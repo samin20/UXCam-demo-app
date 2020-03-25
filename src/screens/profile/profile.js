@@ -2,7 +2,6 @@ import React from 'react';
 import {
     View, Image, FlatList
 } from 'react-native';
-import styles from './styles';
 import { AuthContext } from '../../helpers';
 import { commonStyles } from '../commonStyles';
 import { Text, Divider } from 'react-native-paper';
@@ -29,8 +28,8 @@ function Profile({ navigation }) {
         }
     ];
 
-    function logout(){
-        signOut();
+    function _logout() {
+        signOut(); //logout, clear token and load logged out stack
     }
 
     return (
@@ -53,7 +52,7 @@ function Profile({ navigation }) {
                 renderItem={({ item, index }) => {
                     return (
                         <TouchableOpacity
-                            onPress={() => item.name === 'Logout' ? logout() : {}}
+                            onPress={() => item.name === 'Logout' ? _logout() : {}}
                             style={[commonStyles.infoContainer, { paddingVertical: 15 }]}>
                             <Icon
                                 name={item.icon}

@@ -31,6 +31,7 @@ export default class ContactItem extends React.Component {
     }
 }
 
+//Props that can used with this component....Not required but brings more clarity
 ContactItem.propTypes = {
     item: PropTypes.object.isRequired,
     onPress: PropTypes.func.isRequired,
