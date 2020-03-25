@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home/Home';
 import Contacts from '../screens/contacts/Contacts';
-import Profile from '../screens/profile/profile';
+import Profile from '../screens/profile/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MyColors } from '../config/theme';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const ConversationStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name= "Conversations" component={Home}/>
+            <Stack.Screen name="Conversations" component={Home} />
         </Stack.Navigator>
     )
 }
@@ -21,12 +21,14 @@ const ContactsStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-            options={{headerStyle: {
-                elevation: 0,
-                borderBottomWidth: 0,
-                shadowOpacity: 0
-            }}}
-            name= "Contacts" component={Contacts}/>
+                options={{
+                    headerStyle: {
+                        elevation: 0,
+                        borderBottomWidth: 0,
+                        shadowOpacity: 0
+                    }
+                }}
+                name="Contacts" component={Contacts} />
         </Stack.Navigator>
     )
 }
@@ -34,7 +36,15 @@ const ContactsStack = () => {
 const ProfileStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name= "Profile" component={Profile}/>
+            <Stack.Screen
+                options={{
+                    headerStyle: {
+                        elevation: 0,
+                        borderBottomWidth: 0,
+                        shadowOpacity: 0
+                    }
+                }}
+                name="Profile" component={Profile} />
         </Stack.Navigator>
     )
 }
@@ -44,36 +54,36 @@ const Tab = createBottomTabNavigator();
 export function HomeTab() {
     return (
         <Tab.Navigator
-        initialRouteName='Conversations'
-        tabBarOptions={{
-            showLabel: false
-        }}
-        screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, size }) => {
-                let iconName;
-                let color;
-                
-                if (route.name === 'Conversations') {
-                    iconName = 'ios-chatboxes';
-                    color = focused
-                    ? 'black'
-                    : MyColors.lightGray
+            initialRouteName='Conversations'
+            tabBarOptions={{
+                showLabel: false
+            }}
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, size }) => {
+                    let iconName;
+                    let color;
+
+                    if (route.name === 'Conversations') {
+                        iconName = 'ios-chatboxes';
+                        color = focused
+                            ? 'black'
+                            : MyColors.lightGray
+                    }
+                    else if (route.name === 'Contacts') {
+                        iconName = 'md-contacts';
+                        color = focused
+                            ? 'black'
+                            : MyColors.lightGray
+                    }
+                    else if (route.name === 'Profile') {
+                        iconName = 'ios-list-box';
+                        color = focused
+                            ? 'black'
+                            : MyColors.lightGray
+                    }
+                    return <Ionicons name={iconName} size={size} color={color} />;
                 }
-                else if (route.name === 'Contacts') {
-                    iconName = 'md-contacts';
-                    color = focused
-                    ? 'black'
-                    : MyColors.lightGray
-                }
-                else if (route.name === 'Profile'){
-                    iconName = 'ios-list-box';
-                    color = focused
-                    ? 'black'
-                    : MyColors.lightGray
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-            }
-        })}
+            })}
         >
             <Tab.Screen name='Conversations' component={ConversationStack} />
             <Tab.Screen name='Contacts' component={ContactsStack} />

@@ -5,9 +5,9 @@ import {
 import styles from './styles';
 import { IconButton, Text, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
-import { FontSize } from '../../config/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getRandomInt } from '../../helpers/random';
+import { commonStyles } from '../commonStyles';
 
 export default function ContactDetail({ navigation, route }) {
 
@@ -38,11 +38,11 @@ export default function ContactDetail({ navigation, route }) {
             <View style={{ alignItems: 'center' }}>
                 <Image
                     source={{ uri: route.params.image }}
-                    style={styles.image}
+                    style={commonStyles.profileImage}
                 />
-                <Text style={styles.text}>{route.params.name}</Text>
+                <Text style={commonStyles.profileNameText}>{route.params.name}</Text>
             </View>
-            <View style={[styles.infoContainer, { marginTop: 40 }]}>
+            <View style={[commonStyles.infoContainer, { marginTop: 40 }]}>
                 <Icon
                     name="phone"
                     size={20}
@@ -50,7 +50,7 @@ export default function ContactDetail({ navigation, route }) {
                 />
                 <Text style={styles.infoText}>XXXXXXXXXXXXX</Text>
             </View>
-            <View style={[styles.infoContainer, { marginTop: 20 }]}>
+            <View style={[commonStyles.infoContainer, { marginTop: 20 }]}>
                 <Icon
                     name="mail"
                     size={20}
@@ -63,22 +63,18 @@ export default function ContactDetail({ navigation, route }) {
                 data={actions}
                 ListHeaderComponent={() => {
                     return (
-                        <Text style={styles.headerText}>Options</Text>
+                        <Text style={commonStyles.headerText}>Options</Text>
                     )
                 }}
                 renderItem={({ item }) => {
                     return (
-                        <View style={[styles.infoContainer, { paddingVertical: 15 }]}>
+                        <View style={[commonStyles.infoContainer, { paddingVertical: 15 }]}>
                             <Icon
                                 name={item.icon}
                                 color="gray"
                                 size={16}
                             />
-                            <Text style={{
-                                marginLeft: 10,
-                                fontSize: FontSize.medium,
-                                opacity: 0.8
-                            }}>{item.name}</Text>
+                            <Text style={commonStyles.listText}>{item.name}</Text>
                         </View>
                     )
                 }}
