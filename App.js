@@ -15,7 +15,7 @@ export default () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
-  const theme = Theme;
+  const theme = Theme; //adds theme to react-native-paper UIs
   const authContext = React.useMemo(() => {
     return {
       signIn: async (token) => {

@@ -3,7 +3,7 @@ import {
     View, Image, FlatList
 } from 'react-native';
 import styles from './styles';
-import { IconButton, Text, Divider } from 'react-native-paper';
+import { IconButton, Text, Divider, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getRandomInt } from '../../helpers/random';
@@ -41,6 +41,14 @@ export default function ContactDetail({ navigation, route }) {
                     style={commonStyles.profileImage}
                 />
                 <Text style={commonStyles.profileNameText}>{route.params.name}</Text>
+                <Button
+                    style={{ marginTop: 10 }}
+                    theme={{ roundness: 20 }}
+                    icon="account-plus-outline"
+                    mode="contained"
+                    onPress={() => console.log('add to contact')}>
+                    Add to contact
+                </Button>
             </View>
             <View style={[commonStyles.infoContainer, { marginTop: 40 }]}>
                 <Icon

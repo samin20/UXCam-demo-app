@@ -27,13 +27,7 @@ const ContactsStack = () => {
                         elevation: 0,
                         borderBottomWidth: 0,
                         shadowOpacity: 0
-                    },
-                    headerRight: () => (
-                        <IconButton
-                            icon="account-plus-outline"
-                            onPress={() => console.log('add new contact')}
-                        />
-                    )
+                    }
                 }}
                 name="Contacts" component={Contacts} />
         </Stack.Navigator>
@@ -44,7 +38,7 @@ const ProfileStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                options={{
+                options={({ navigation }) => ({
                     headerStyle: {
                         elevation: 0,
                         borderBottomWidth: 0,
@@ -54,10 +48,10 @@ const ProfileStack = () => {
                     headerRight: () => (
                         <IconButton
                             icon="square-edit-outline"
-                            onPress={() => console.log('edit profile')}
+                            onPress={() => navigation.navigate('EditProfile')}
                         />
                     )
-                }}
+                })}
                 name="Profile" component={Profile} />
         </Stack.Navigator>
     )
