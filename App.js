@@ -5,7 +5,6 @@ import { LoggedOutStack } from './src/navRoutes/loggedOutStack';
 import { NavigationContainer } from '@react-navigation/native';
 import Splash from './src/screens/splash/Splash';
 import { AuthContext } from './src/helpers/context';
-import { setToken, removeUser, isSignedIn } from './src/helpers';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Theme } from './src/config/theme';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -18,29 +17,23 @@ export default () => {
   const theme = Theme; //adds theme to react-native-paper UIs
   const authContext = React.useMemo(() => {
     return {
-      signIn: async (token) => {
+      signIn: (token) => {
         setIsLoading(false);
-        await setToken(token);
         setUserToken(token);
       },
-      signUp: async (token) => {
+      signUp: (token) => {
         setIsLoading(false);
-        await setToken(token);
         setUserToken(token);
       },
-      signOut: async () => {
+      signOut: () => {
         setIsLoading(false);
-        await removeUser();
         setUserToken(null);
       }
     }
   }, [])
 
   React.useEffect(() => {
-    setTimeout(async () => {
-      let userToken;
-      userToken = await isSignedIn();
-      setUserToken(userToken);
+    setTimeout(() => {
       setIsLoading(false);
     }, 0)
   })
