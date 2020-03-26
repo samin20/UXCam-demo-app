@@ -37,7 +37,7 @@ function Register({ navigation }) {
 
     //opens url in external default browser
     function _openTerms() {
-        const url = "https://help.uxcam.com/hc/en-us/articles/360004117372";
+        const url = "https://www.google.com/";
         Linking.canOpenURL(url)
             .then(supported => {
                 if (supported) {
