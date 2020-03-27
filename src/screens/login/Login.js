@@ -31,11 +31,18 @@ function Login({ navigation }) {
         setInputValues({ ...inputValues, [key]: value });
     };
 
+    //sets username/email as user identity
+    function _setUserIdentity() {
+        if (inputValues.email.trim() !== '') {
+            RNUxcam.setUserIdentity(inputValues.email);
+        }
+    }
+
     function _login() {
         Keyboard.dismiss();
-        console.log(inputValues);
         setShowSpinner(true);
         setTimeout(() => {
+            _setUserIdentity();
             setShowSpinner(false);
             signIn('token'); //save token and change stack to logged in
         }, 2000);

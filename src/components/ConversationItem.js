@@ -9,6 +9,7 @@ import { MyColors } from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
+import { hideSensitiveView } from '../helpers/uxcamHelper';
 
 export default class ConversationItem extends React.Component {
     render() {
@@ -30,7 +31,12 @@ export default class ConversationItem extends React.Component {
                         <Text style={styles.time}>{item.time}</Text>
                     </View>
                     <View style={styles.textRow}>
-                        <Text numberOfLines={1} style={[styles.message, item.isRead ? {} : { fontWeight: 'bold' }]}>{item.text}</Text>
+                        <Text
+                            ref={hideSensitiveView}
+                            numberOfLines={1}
+                            style={[styles.message, item.isRead ? {} : { fontWeight: 'bold' }]}>
+                            {item.text}
+                        </Text>
                         <Icon style={{ flex: 2, textAlign: 'right' }} name={item.isRead ? 'check-all' : 'check'} size={15} color={MyColors.primaryColor} />
                     </View>
                 </View>

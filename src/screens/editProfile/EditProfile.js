@@ -8,6 +8,7 @@ import { IconButton, TextInput, Text } from 'react-native-paper';
 import { MyColors, FontSize } from '../../config/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { logEvent } from '../../helpers/uxcamHelper';
 
 export default function EditProfile({ navigation }) {
 
@@ -15,7 +16,10 @@ export default function EditProfile({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <TouchableOpacity onPress={_save}>
+                <TouchableOpacity onPress={() => {
+                    logEvent('action', { type: 'save profile' });
+                    _save();
+                }}>
                     <Text style={{
                         marginRight: 20,
                         fontSize: FontSize.medium,

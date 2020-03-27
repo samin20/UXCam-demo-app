@@ -93,6 +93,7 @@ export default function ChatDetail({ route }) {
                     color={MyColors.primaryColor}
                     icon="image"
                     size={22}
+                    disabled={true}
                     onPress={() => console.log('open gallery')}
                 />
                 <TextInput
@@ -121,6 +122,7 @@ export default function ChatDetail({ route }) {
                     color={MyColors.primaryColor}
                     icon="thumb-up"
                     size={22}
+                    disabled={true}
                     onPress={() => console.log('like')}
                 />
             </View>

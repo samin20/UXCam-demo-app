@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { getRandomInt, showToast } from '../../helpers';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { hideSensitiveView, logEvent } from '../../helpers/uxcamHelper';
 
 export default function ContactDetail({ navigation, route }) {
 
@@ -65,7 +66,7 @@ export default function ContactDetail({ navigation, route }) {
                     theme={{ roundness: 20 }}
                     icon="account-plus-outline"
                     mode="contained"
-                    onPress={() => console.log('add to contact')}>
+                    onPress={() => logEvent('action', { type: 'add to contact' })}>
                     Add to contact
                 </Button>
             </View>
@@ -75,7 +76,7 @@ export default function ContactDetail({ navigation, route }) {
                     size={20}
                     color="gray"
                 />
-                <Text style={styles.infoText}>XXXXXXXXXXXXX</Text>
+                <Text ref={hideSensitiveView} style={styles.infoText}>XXXXXXXXXXXXX</Text>
             </View>
             <View style={[commonStyles.infoContainer, { marginTop: 20 }]}>
                 <Icon

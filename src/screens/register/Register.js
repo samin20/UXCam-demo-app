@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-    View, Keyboard, Linking
+    View, Keyboard, Linking, AppState
 } from 'react-native';
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,12 +9,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Text, TextInput, Button, Caption } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { AuthContext } from '../../helpers';
+import { showToast } from '../../helpers';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { hideSensitiveView } from '../../helpers/uxcamHelper';
+import RNUxcam from 'react-native-ux-cam';
 
 function Register({ navigation }) {
-
-    const { signIn } = React.useContext(AuthContext);
 
     const [showSpinner, setShowSpinner] = useState(false);
     const [inputValues, setInputValues] = useState({
@@ -25,13 +25,31 @@ function Register({ navigation }) {
         setInputValues({ ...inputValues, [key]: value });
     };
 
+    useEffect(() => {
+        AppState.addEventListener("change", _handleAppStateChange);
+
+        return () => {
+            AppState.removeEventListener("change", _handleAppStateChange);
+        };
+    }, []);
+
+    //allow short break incase user view terms and condition on external browser
+    const _handleAppStateChange = nextAppState => {
+        if (nextAppState === "active") {
+            RNUxcam.allowShortBreakForAnotherApp(false);
+        }
+        else if (nextAppState === "inactive") {
+            RNUxcam.allowShortBreakForAnotherApp(true);
+        }
+    };
+
     function _register() {
         Keyboard.dismiss();
-        console.log(inputValues)
         setShowSpinner(true);
         setTimeout(() => {
+            showToast('User successfully registered');
             setShowSpinner(false);
-            signIn('token'); //save token and change stack to logged in
+            navigation.goBack();
         }, 2000);
     }
 
@@ -87,6 +105,7 @@ function Register({ navigation }) {
                         onChangeText={text => _handleOnChange('email', text)}
                     />
                     <TextInput
+                        ref={hideSensitiveView}
                         autoCapitalize="none"
                         theme={{
                             roundness: 20,

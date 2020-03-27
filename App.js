@@ -14,6 +14,8 @@ import { showToast } from './src/helpers';
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
 import RNUxcam from 'react-native-ux-cam';
+import { tagScreenName } from './src/helpers/uxcamHelper';
+
 //session starts from Login screen------'./src/screens/login/Login.js'
 RNUxcam.optIntoSchematicRecordings();
 
@@ -37,6 +39,8 @@ export default () => {
   }, [])
 
   React.useEffect(() => {
+    //Warning: Tag first screen name manually on initialRoute screen of each root stack
+    tagScreenName('Login');
     _uxcamSessionStartListener();
     setTimeout(() => {
       setIsLoading(false);
@@ -58,11 +62,28 @@ export default () => {
     return <Splash />
   }
 
+  // Gets the current screen from navigation state
+  const getActiveRouteName = state => {
+    const route = state.routes[state.index];
+
+    if (route.state) {
+      // Dive into nested navigators
+      return getActiveRouteName(route.state);
+    }
+
+    return route.name;
+  };
+
   return (
     <AuthContext.Provider value={authContext}>
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
-          <NavigationContainer>
+          <NavigationContainer
+            onStateChange={state => {
+              //tags screen name using active route name
+              tagScreenName(getActiveRouteName(state))
+            }}
+          >
             {userToken ?
               <MainModal /> : <LoggedOutStack />
             }

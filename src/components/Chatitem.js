@@ -9,6 +9,7 @@ import { Text } from 'react-native-paper';
 import { MyColors, FontSize } from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
+import { hideSensitiveView } from '../helpers/uxcamHelper';
 
 export default class ChatItem extends React.Component {
     render() {
@@ -25,7 +26,11 @@ export default class ChatItem extends React.Component {
                     }
                     <View style={isMy ? styles.myMessageWrapper : styles.otherMsgWrapper}>
                         <View style={{ flex: 1 }} />
-                        <Text style={{ color: isMy ? 'white' : 'black' }}>{item.text}</Text>
+                        <Text
+                            ref={hideSensitiveView}
+                            style={{ color: isMy ? 'white' : 'black' }}>
+                            {item.text}
+                        </Text>
                     </View>
                 </View>
                 <View style={isMy ? styles.myTimeContainer : styles.otherTimeContainer}>
@@ -40,7 +45,7 @@ export default class ChatItem extends React.Component {
                                     ? 'check-all'
                                     : 'check'}
                             size={15}
-                            style={{marginBottom: 10}}
+                            style={{ marginBottom: 10 }}
                             color={item.sent === true ? MyColors.primaryColor : 'gray'} />
                     }
                 </View>
