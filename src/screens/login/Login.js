@@ -15,6 +15,7 @@ import { MyColors } from '../../config/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import StartDialog from '../../components/Dialog';
+import RNUxcam from 'react-native-ux-cam';
 
 function Login({ navigation }) {
 
@@ -42,7 +43,7 @@ function Login({ navigation }) {
 
     function _startSession(key) {
         setShowDialog(false);
-        console.log(key)
+        RNUxcam.startWithKey(key);
     }
 
     return (
