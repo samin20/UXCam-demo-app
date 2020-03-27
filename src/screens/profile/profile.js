@@ -21,7 +21,7 @@ function Profile({ navigation }) {
         },
         {
             icon: 'shield-lock',
-            name: 'Privacy conversations',
+            name: 'Private conversations',
             routeName: 'PrivateMessage'
         },
         {
