@@ -5884,6 +5884,11 @@ react-native-screens@^2.3.0:
   dependencies:
     debounce "^1.2.0"
 
+react-native-ux-cam@^5.1.15:
+  version "5.1.15"
+  resolved "https://registry.yarnpkg.com/react-native-ux-cam/-/react-native-ux-cam-5.1.15.tgz#4a900a8d46be7510c2a62c573c67ee54a221b5df"
+  integrity sha512-88w+V8DUeF/IHYk+XcZ6pIPWek8h/BCajhm6ANCOu54fnu2OgRbi+xYAfUUKnVLHyk4a4Y6DeUAuc4EGE4bMRQ==
+
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
