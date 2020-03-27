@@ -9,17 +9,19 @@ import styles from './styles';
 import { AuthContext } from '../../helpers/context';
 import Logo from '../../components/Logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput, Caption, Button, Text } from 'react-native-paper';
+import { TextInput, Caption, Button, Text, IconButton } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { MyColors } from '../../config/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
+import StartDialog from '../../components/Dialog';
 
 function Login({ navigation }) {
 
     const { signIn } = React.useContext(AuthContext);
 
     const [showSpinner, setShowSpinner] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
     const [inputValues, setInputValues] = useState({
         email: '', password: ''
     });
@@ -32,10 +34,15 @@ function Login({ navigation }) {
         Keyboard.dismiss();
         console.log(inputValues);
         setShowSpinner(true);
-        setTimeout(()=>{
+        setTimeout(() => {
             setShowSpinner(false);
             signIn('token'); //save token and change stack to logged in
         }, 2000);
+    }
+
+    function _startSession(key) {
+        setShowDialog(false);
+        console.log(key)
     }
 
     return (
@@ -43,12 +50,24 @@ function Login({ navigation }) {
             <Spinner
                 visible={showSpinner}
             />
+            <StartDialog
+                onStart={(key) => _startSession(key)}
+                onDismiss={() => setShowDialog(false)}
+                visible={showDialog}
+            />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAvoidingView
                     keyboardVerticalOffset={-250}
                     behavior="position"
                     enabled
                     style={{ padding: 20, flex: 1 }}>
+
+                    <View style={{ flexDirection: 'row-reverse' }}>
+                        <IconButton
+                            onPress={() => setShowDialog(true)}
+                            icon="settings"
+                        />
+                    </View>
                     <Logo />
                     <Caption>Enter your login info</Caption>
                     <TextInput
@@ -78,7 +97,6 @@ function Login({ navigation }) {
                         mode="outlined"
                         style={commonStyles.textInput}
                         label='Password'
-                        value={inputValues.password}
                         value={inputValues.password}
                         onChangeText={text => _handleOnChange('password', text)}
                     />

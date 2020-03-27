@@ -21,10 +21,6 @@ export default () => {
         setIsLoading(false);
         setUserToken(token);
       },
-      signUp: (token) => {
-        setIsLoading(false);
-        setUserToken(token);
-      },
       signOut: () => {
         setIsLoading(false);
         setUserToken(null);
