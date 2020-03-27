@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Searchbar, Divider } from 'react-native-paper';
 import ContactItem from '../../components/ContactItem';
-import { getRandomInt } from '../../helpers/random';
+import { getRandomInt } from '../../helpers';
 
 function Contacts({ navigation }) {
 
@@ -37,6 +37,10 @@ function Contacts({ navigation }) {
         setContactList(filter);
     }
 
+    function onSendMessage(userInfo) {
+        setTimeout(() => navigation.navigate('ChatDetail', { ...userInfo }), 500)
+    }
+
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
             <Searchbar
@@ -56,7 +60,8 @@ function Contacts({ navigation }) {
                             isOnline={onlineIDs.includes(item.id)}
                             onPress={() => navigation.navigate('ContactModal', {
                                 name: item.name,
-                                image: images[getRandomInt(4)]
+                                image: images[getRandomInt(4)],
+                                onSendMessage: (userInfo) => onSendMessage(userInfo)
                             })}
                         />
                     )

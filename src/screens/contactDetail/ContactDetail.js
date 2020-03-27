@@ -6,8 +6,9 @@ import styles from './styles';
 import { IconButton, Text, Divider, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getRandomInt } from '../../helpers/random';
+import { getRandomInt, showToast } from '../../helpers';
 import { commonStyles } from '../commonStyles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ContactDetail({ navigation, route }) {
 
@@ -25,6 +26,24 @@ export default function ContactDetail({ navigation, route }) {
             name: 'Mark as favourite'
         }
     ];
+
+    function _listAction(index) {
+        switch (index) {
+            case 0:
+                route.params.onSendMessage({
+                    name: route.params.name,
+                    image: route.params.image
+                })
+                navigation.goBack();
+                break;
+            case 1:
+                showToast('User blocked')
+                break;
+            case 2:
+                showToast('User added to favourite')
+                break;
+        }
+    }
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
@@ -74,16 +93,18 @@ export default function ContactDetail({ navigation, route }) {
                         <Text style={commonStyles.headerText}>Options</Text>
                     )
                 }}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     return (
-                        <View style={[commonStyles.infoContainer, { paddingVertical: 15 }]}>
+                        <TouchableOpacity
+                            onPress={() => _listAction(index)}
+                            style={[commonStyles.infoContainer, { paddingVertical: 15 }]}>
                             <Icon
                                 name={item.icon}
                                 color="gray"
                                 size={16}
                             />
                             <Text style={commonStyles.listText}>{item.name}</Text>
-                        </View>
+                        </TouchableOpacity>
                     )
                 }}
                 keyExtractor={() => String(getRandomInt(1000))}

@@ -6,7 +6,7 @@ import { AuthContext } from '../../helpers';
 import { commonStyles } from '../commonStyles';
 import { Text, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getRandomInt } from '../../helpers/random';
+import { getRandomInt } from '../../helpers';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Profile({ navigation }) {

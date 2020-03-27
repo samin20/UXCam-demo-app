@@ -4,7 +4,7 @@ import {
     FlatList
 } from 'react-native';
 import ConversationItem from '../../components/ConversationItem';
-import { getRandomInt, getRandomBool } from '../../helpers/random';
+import { getRandomInt, getRandomBool } from '../../helpers';
 import { Divider } from 'react-native-paper';
 
 function Home({ navigation }) {
