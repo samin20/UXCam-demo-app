@@ -16,20 +16,27 @@ function Profile({ navigation }) {
     const actions = [
         {
             icon: 'lock-outline',
-            name: 'Privacy'
+            name: 'Privacy policy',
+            routeName: 'PrivacyPolicy'
         },
         {
-            icon: 'settings',
-            name: 'Settings'
+            icon: 'shield-lock',
+            name: 'Privacy conversations',
+            routeName: 'PrivateMessage'
         },
         {
             icon: 'logout',
-            name: 'Logout'
+            name: 'Logout',
+            routeName: null
         }
     ];
 
     function _logout() {
         signOut(); //logout, clear token and load logged out stack
+    }
+
+    function _navigate(routeName) {
+        routeName ? navigation.navigate(routeName) : _logout()
     }
 
     return (
@@ -49,10 +56,10 @@ function Profile({ navigation }) {
                         <Text style={commonStyles.headerText}>Options</Text>
                     )
                 }}
-                renderItem={({ item, index }) => {
+                renderItem={({ item }) => {
                     return (
                         <TouchableOpacity
-                            onPress={() => item.name === 'Logout' ? _logout() : {}}
+                            onPress={() => _navigate(item.routeName)}
                             style={[commonStyles.infoContainer, { paddingVertical: 15 }]}>
                             <Icon
                                 name={item.icon}
