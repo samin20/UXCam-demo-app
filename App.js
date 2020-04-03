@@ -16,8 +16,9 @@ import { NativeModules, NativeEventEmitter } from 'react-native';
 import RNUxcam from 'react-native-ux-cam';
 import { tagScreenName, startSessionWithKey } from './src/helpers/uxcamHelper';
 
-//session starts from Login screen------'./src/screens/login/Login.js'
 RNUxcam.optIntoSchematicRecordings();
+//RNUxCam.startWithKey() methods goes here
+//For this demo app, session starts from Login.js
 
 export default () => {
 
