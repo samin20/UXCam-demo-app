@@ -4,7 +4,7 @@ Chat application demonstrating UXCam integration.
 | ![Alt text](/screenshots/sc-1.png?raw=true "Add app key") | ![Alt text](/screenshots/sc-3.png?raw=true "Register") | ![Alt text](/screenshots/sc-5.png?raw=true "Conversation") |
 | - | - | - |
 
->This application does not have backend services and does not require UXCam account to run. However using the app in conjunction with UXCam **app key** will give better insight about how SDK works.
+>Note: This application does not have backend services and does not require UXCam account to run. However using the app in conjunction with UXCam **app key** will give better insight about how SDK works.
 
 ## Steps to run
 `yarn` or `npm install`
