@@ -6,7 +6,8 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import styles from './styles';
-import { AuthContext } from '../../helpers/context';
+import { AuthContext } from '../../helpers';
+import { addUserIdentity } from '../../helpers/uxcamHelper'
 import Logo from '../../components/Logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Caption, Button, Text, IconButton } from 'react-native-paper';
@@ -15,11 +16,10 @@ import { MyColors } from '../../config/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import StartDialog from '../../components/Dialog';
-import RNUxcam from 'react-native-ux-cam';
 
 function Login({ navigation }) {
 
-    const { signIn } = React.useContext(AuthContext);
+    const { signIn, startSession } = React.useContext(AuthContext);
 
     const [showSpinner, setShowSpinner] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
@@ -34,7 +34,7 @@ function Login({ navigation }) {
     //sets username/email as user identity
     function _setUserIdentity() {
         if (inputValues.email.trim() !== '') {
-            RNUxcam.setUserIdentity(inputValues.email);
+            addUserIdentity(inputValues.email);
         }
     }
 
@@ -48,9 +48,10 @@ function Login({ navigation }) {
         }, 2000);
     }
 
+    //Start UXCam session
     function _startSession(key) {
         setShowDialog(false);
-        RNUxcam.startWithKey(key);
+        startSession(key);
     }
 
     return (

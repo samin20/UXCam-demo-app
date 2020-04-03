@@ -21,3 +21,20 @@ export const tagScreenName = (name) => {
 export const occludeSensitiveScreen = (bool) => {
     RNUxcam.occludeSensitiveScreen(bool);
 }
+
+//set user identity
+export const addUserIdentity = (email) => {
+    RNUxcam.setUserIdentity(email);
+}
+
+//start with key
+//Note: Just for demo purpose.
+//It is recommended that you add this on app start on app.js
+export const startSessionWithKey = (key) => {
+    RNUxcam.startWithKey(key);
+}
+
+//allow short breaks when app goes to background
+export const allowShowBreak = (boolValue) => {
+    RNUxcam.allowShortBreakForAnotherApp(boolValue);
+}

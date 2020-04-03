@@ -14,7 +14,7 @@ import { showToast } from './src/helpers';
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
 import RNUxcam from 'react-native-ux-cam';
-import { tagScreenName } from './src/helpers/uxcamHelper';
+import { tagScreenName, startSessionWithKey } from './src/helpers/uxcamHelper';
 
 //session starts from Login screen------'./src/screens/login/Login.js'
 RNUxcam.optIntoSchematicRecordings();
@@ -34,6 +34,10 @@ export default () => {
       signOut: () => {
         setIsLoading(false);
         setUserToken(null);
+      },
+      //starts uxcam session
+      startSession: (key) => {
+        startSessionWithKey(key);
       }
     }
   }, [])

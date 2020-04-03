@@ -11,8 +11,7 @@ import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { showToast } from '../../helpers';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { hideSensitiveView } from '../../helpers/uxcamHelper';
-import RNUxcam from 'react-native-ux-cam';
+import { hideSensitiveView, allowShowBreak } from '../../helpers/uxcamHelper';
 
 function Register({ navigation }) {
 
@@ -36,10 +35,10 @@ function Register({ navigation }) {
     //allow short break incase user view terms and condition on external browser
     const _handleAppStateChange = nextAppState => {
         if (nextAppState === "active") {
-            RNUxcam.allowShortBreakForAnotherApp(false);
+            allowShowBreak(false);
         }
         else if (nextAppState === "inactive") {
-            RNUxcam.allowShortBreakForAnotherApp(true);
+            allowShowBreak(true);
         }
     };
 
