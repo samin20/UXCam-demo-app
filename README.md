@@ -21,9 +21,12 @@ Chat application demonstrating UXCam integration.
 >Note: Session can take some time to appear on UXCam dashboard. Put application on background after use to upload sessions. Force closing the application will delay session upload.
 
 ## UXCam features covered
-###### Set user identity
-Adds custom user identity. Refer to: Login.js
-###### Occlude sensitive view
+##### Set user identity
+Adds custom user identity.
+| Filename | line no.|
+|----------|---------|
+| Login.js | 37 |
+##### Occlude sensitive view
 Hides sensitive view that should not be captured.
 | Filename | line no.|
 |----------|---------|
@@ -31,18 +34,18 @@ Hides sensitive view that should not be captured.
 | ConversationItem.js | 35 |
 | ContactDetail.js | 79 |
 | Register.js | 107 |
-###### Event logging
+##### Event logging
 Logs custom events on current session.
 | Filename | line no.|
 |----------|---------|
 | ContactDetail.js | 69 |
 | EditProfile.js | 20 |
-###### Screen tagging
+##### Screen tagging
 Tags screen after navigation change. Uses react-navigation's **onStateChange** method to detect and get route name.
 | Filename | line no.|
 |----------|---------|
 | App.js | 88 |
-###### Occlude sensitive screen
+##### Occlude sensitive screen
 Occudes screen with sensitive information from capturing.
 | Filename | line no.|
 |----------|---------|
