@@ -12,6 +12,11 @@ export const logEvent = (key, name) => {
     RNUxcam.logEvent(key, name);
 }
 
+//log custom events
+export const logEventWithouProps = (key, name) => {
+    RNUxcam.logEvent(key);
+}
+
 //tag current screen
 export const tagScreenName = (name) => {
     RNUxcam.tagScreenName(name);

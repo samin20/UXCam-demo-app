@@ -5,6 +5,7 @@ import ChatDetail from '../screens/chatDetail/ChatDetail';
 import EditProfile from '../screens/editProfile/EditProfile';
 import PrivacyPolicy from '../screens/webView/PrivacyPolicy';
 import PrivateMessage from '../screens/privateMessage/PrivateMessage';
+import Crasher from '../screens/crasher/Crasher';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,13 @@ export function LoggedInStack() {
                 }}
                 name="PrivateMessage"
                 component={PrivateMessage} />
+            <Stack.Screen
+                options={{
+                    headerBackTitleVisible: false,
+                    title: 'Crasher'
+                }}
+                name="Crasher"
+                component={Crasher} />
         </Stack.Navigator>
     )
 }

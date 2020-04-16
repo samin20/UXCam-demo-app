@@ -90,7 +90,7 @@ function Login({ navigation }) {
                         mode="outlined"
                         keyboardType="email-address"
                         style={commonStyles.textInput}
-                        label='Email'
+                        label='Email - will be user identity'
                         value={inputValues.email}
                         onChangeText={text => _handleOnChange('email', text)}
                     />

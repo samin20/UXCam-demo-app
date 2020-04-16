@@ -25,6 +25,12 @@ function Profile({ navigation }) {
             routeName: 'PrivateMessage'
         },
         {
+            icon: 'skull-crossbones-outline',
+            name: 'Crash me if you can',
+            routeName: 'Crasher'
+        },
+
+        {
             icon: 'logout',
             name: 'Logout',
             routeName: null

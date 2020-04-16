@@ -11,7 +11,7 @@ import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { showToast } from '../../helpers';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { hideSensitiveView, allowShowBreak } from '../../helpers/uxcamHelper';
+import { hideSensitiveView, allowShowBreak, logEventWithouProps } from '../../helpers/uxcamHelper';
 
 function Register({ navigation }) {
 
@@ -48,6 +48,7 @@ function Register({ navigation }) {
         setTimeout(() => {
             showToast('User successfully registered');
             setShowSpinner(false);
+            logEventWithouProps('User registered');
             navigation.goBack();
         }, 2000);
     }

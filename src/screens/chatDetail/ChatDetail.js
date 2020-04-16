@@ -10,6 +10,7 @@ import styles from './styles';
 import ChatItem from '../../components/Chatitem';
 import { TextInput, IconButton } from 'react-native-paper';
 import { MyColors } from '../../config/theme';
+import { logEventWithouProps } from '../../helpers/uxcamHelper';
 
 export default function ChatDetail({ route }) {
 
@@ -40,6 +41,7 @@ export default function ChatDetail({ route }) {
         return () => {
             this.keyboardDidShowListener.remove();
             this.keyboardDidHideListener.remove();
+            logEventWithouProps("Chat ended");
         }
     }, []) //Only runs once at component mount
 

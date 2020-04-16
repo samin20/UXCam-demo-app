@@ -45,6 +45,12 @@ export default function ContactDetail({ navigation, route }) {
                 break;
         }
     }
+    
+    function _addToContact(){
+        navigation.goBack();
+        showToast('Added to contact');
+        logEvent('action', { type: 'add to contact' });
+    }
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
@@ -66,7 +72,7 @@ export default function ContactDetail({ navigation, route }) {
                     theme={{ roundness: 20 }}
                     icon="account-plus-outline"
                     mode="contained"
-                    onPress={() => logEvent('action', { type: 'add to contact' })}>
+                    onPress={_addToContact}>
                     Add to contact
                 </Button>
             </View>
