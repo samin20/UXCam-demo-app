@@ -30,23 +30,26 @@ Adds custom user identity.
 Hides sensitive view that should not be captured.
 | Filename | line no.|
 |----------|---------|
-| ChatItem.js | 30 |
 | ConversationItem.js | 35 |
-| ContactDetail.js | 79 |
-| Register.js | 107 |
+| ContactDetail.js | 85 |
+| Register.js | 108 |
 ##### Event logging
 Logs custom events on current session.
 | Filename | line no.|
 |----------|---------|
-| ContactDetail.js | 69 |
+| ContactDetail.js | 52 |
 | EditProfile.js | 20 |
+| ChatDetail.js | 44 |
+| Register.js | 51 |
 ##### Screen tagging
 Tags screen after navigation change. Uses react-navigation's **onStateChange** method to detect and get route name.
 | Filename | line no.|
 |----------|---------|
-| App.js | 88 |
+| App.js | 89 |
 ##### Occlude sensitive screen
 Occudes screen with sensitive information from capturing.
 | Filename | line no.|
 |----------|---------|
 | PrivateMessage.js | 13/15 |
+##### Crash logs
+Try crashing the app from **Crasher** page to view crash logs on session
