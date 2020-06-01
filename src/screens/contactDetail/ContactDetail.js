@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { getRandomInt, showToast } from '../../helpers';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { hideSensitiveView, logEvent } from '../../helpers/uxcamHelper';
+import { hideSensitiveView, logEvent, logEventWithouProps } from '../../helpers/uxcamHelper';
 
 export default function ContactDetail({ navigation, route }) {
 
@@ -31,6 +31,7 @@ export default function ContactDetail({ navigation, route }) {
     function _listAction(index) {
         switch (index) {
             case 0:
+                logEvent('navigation', { from: 'Contact detail' })
                 route.params.onSendMessage({
                     name: route.params.name,
                     image: route.params.image
@@ -38,15 +39,17 @@ export default function ContactDetail({ navigation, route }) {
                 navigation.goBack();
                 break;
             case 1:
+                logEventWithouProps('User blocked')
                 showToast('User blocked')
                 break;
             case 2:
+                logEventWithouProps('User added to favourite')
                 showToast('User added to favourite')
                 break;
         }
     }
-    
-    function _addToContact(){
+
+    function _addToContact() {
         navigation.goBack();
         showToast('Added to contact');
         logEvent('action', { type: 'add to contact' });
@@ -90,7 +93,11 @@ export default function ContactDetail({ navigation, route }) {
                     size={20}
                     color="gray"
                 />
-                <Text style={styles.infoText}>user@userdomain.com</Text>
+                <Text
+                    ref={hideSensitiveView}
+                    style={styles.infoText}>
+                    user@userdomain.com
+                </Text>
             </View>
             <FlatList
                 style={{ flex: 1, marginTop: 10 }}

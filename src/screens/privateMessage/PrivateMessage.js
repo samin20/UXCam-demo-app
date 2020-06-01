@@ -4,15 +4,23 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { Text } from 'react-native-paper';
-import { occludeSensitiveScreen } from '../../helpers/uxcamHelper';
+import { occludeSensitiveScreen, logEvent } from '../../helpers/uxcamHelper';
 
 export default function PrivateMessage() {
 
+    let timeSpent = 0;
 
     useEffect(() => {
         occludeSensitiveScreen(true);
+        this.interV = setInterval(() => {
+            timeSpent += 1;
+        }, 1000)
         return () => {
+            logEvent("exit private conversation", {
+                timeSpent: timeSpent + " seconds"
+            })
             occludeSensitiveScreen(false);
+            clearInterval(this.interV)
         }
     }, [])
 

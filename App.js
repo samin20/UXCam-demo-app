@@ -1,3 +1,8 @@
+
+import { enableScreens } from 'react-native-screens';
+
+enableScreens();
+
 import 'react-native-gesture-handler';
 
 import React from 'react';
@@ -17,7 +22,11 @@ import RNUxcam from 'react-native-ux-cam';
 import { tagScreenName, startSessionWithKey } from './src/helpers/uxcamHelper';
 
 RNUxcam.optIntoSchematicRecordings();
-//RNUxCam.startWithKey() methods goes here
+
+// required when using react-native-screens or native navigation
+RNUxcam.setAutomaticScreenNameTagging(false);
+
+//RNUxcam.startWithKey() methods goes here
 //For this demo app, session starts from Login.js
 
 export default () => {

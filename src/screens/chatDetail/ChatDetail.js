@@ -10,7 +10,7 @@ import styles from './styles';
 import ChatItem from '../../components/Chatitem';
 import { TextInput, IconButton } from 'react-native-paper';
 import { MyColors } from '../../config/theme';
-import { logEventWithouProps } from '../../helpers/uxcamHelper';
+import { logEvent } from '../../helpers/uxcamHelper';
 
 export default function ChatDetail({ route }) {
 
@@ -20,6 +20,8 @@ export default function ChatDetail({ route }) {
     const [myText, setMyText] = useState('');
     const [bottomMargin, setBottomMargin] = useState(0);
     const flatListRef = useRef(null);
+
+    const [totalMsgSent, setTotalMsgSent] = useState(0);
 
     useEffect(() => {
         setConversation([
@@ -41,12 +43,14 @@ export default function ChatDetail({ route }) {
         return () => {
             this.keyboardDidShowListener.remove();
             this.keyboardDidHideListener.remove();
-            logEventWithouProps("Chat ended");
+            logEvent("Chat ended", {
+                "totalMsgSent": totalMsgSent + ""
+            });
         }
-    }, []) //Only runs once at component mount
+    }, [totalMsgSent])
 
     function _keyboardDidShow(e) {
-        if(Platform.OS === 'ios'){
+        if (Platform.OS === 'ios') {
             setBottomMargin(e.endCoordinates.height);
         }
     }
@@ -68,6 +72,7 @@ export default function ChatDetail({ route }) {
         })
         setMyText('');
         flatListRef.current.scrollToEnd({ animated: true });
+        setTotalMsgSent(totalMsgSent + 1);
     }
 
     return (

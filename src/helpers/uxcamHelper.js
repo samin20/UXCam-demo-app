@@ -7,6 +7,13 @@ export const hideSensitiveView = (ref) => {
     }
 }
 
+//hides referenced view if reference exist
+export const unhideSensitiveView = (ref) => {
+    if (ref) {
+        RNUxcam.unOccludeSensitiveView(ref);
+    }
+}
+
 //log custom events
 export const logEvent = (key, name) => {
     RNUxcam.logEvent(key, name);
@@ -30,6 +37,10 @@ export const occludeSensitiveScreen = (bool) => {
 //set user identity
 export const addUserIdentity = (email) => {
     RNUxcam.setUserIdentity(email);
+}
+
+export const setUserPropertyValue = (key, val) => {
+    RNUxcam.setUserProperty(key, val);
 }
 
 //start with key

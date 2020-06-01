@@ -9,9 +9,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Text, TextInput, Button, Caption } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { showToast } from '../../helpers';
+import { showToast, getRandomBool, getRandomInt } from '../../helpers';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { hideSensitiveView, allowShowBreak, logEventWithouProps } from '../../helpers/uxcamHelper';
+import { hideSensitiveView, allowShowBreak, logEvent } from '../../helpers/uxcamHelper';
 
 function Register({ navigation }) {
 
@@ -19,6 +19,11 @@ function Register({ navigation }) {
     const [inputValues, setInputValues] = useState({
         username: '', phone: '', email: '', password: '', confirmPassword: ''
     });
+
+    const interests = ["Arts & Entertainment", "Games", "Sports"];
+    const languages = ["English", "Spanish", "Portuguese", "German"];
+    const installSource = ["Facebook Ads", "Google Ads", "Organic"];
+    const ageCategory = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"];
 
     const _handleOnChange = (key, value) => {
         setInputValues({ ...inputValues, [key]: value });
@@ -48,7 +53,14 @@ function Register({ navigation }) {
         setTimeout(() => {
             showToast('User successfully registered');
             setShowSpinner(false);
-            logEventWithouProps('User registered');
+            logEvent("User registered", {
+                "User type": getRandomBool() ? "Free" : "Premium",
+                "Interests": interests[getRandomInt(2)],
+                "Language": languages[getRandomInt(3)],
+                "Install Source": installSource[getRandomInt(2)],
+                "Gender": getRandomBool() ? "Male" : "Female",
+                "Age category": ageCategory[getRandomInt(5)]
+            })
             navigation.goBack();
         }, 2000);
     }
@@ -90,6 +102,7 @@ function Register({ navigation }) {
                         onChangeText={text => _handleOnChange('username', text)}
                     />
                     <TextInput
+                        ref={hideSensitiveView}
                         autoCapitalize="none"
                         theme={{
                             roundness: 20,

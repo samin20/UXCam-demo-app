@@ -6,8 +6,8 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import styles from './styles';
-import { AuthContext } from '../../helpers';
-import { addUserIdentity } from '../../helpers/uxcamHelper'
+import { AuthContext, getRandomBool, getRandomInt } from '../../helpers';
+import { addUserIdentity, setUserPropertyValue } from '../../helpers/uxcamHelper'
 import Logo from '../../components/Logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Caption, Button, Text, IconButton } from 'react-native-paper';
@@ -27,6 +27,11 @@ function Login({ navigation }) {
         email: '', password: ''
     });
 
+    const interests = ["Arts & Entertainment", "Games", "Sports"];
+    const languages = ["English", "Spanish", "Portuguese", "German"];
+    const installSource = ["Facebook Ads", "Google Ads", "Organic"];
+    const ageCategory = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"];
+
     const _handleOnChange = (key, value) => {
         setInputValues({ ...inputValues, [key]: value });
     };
@@ -38,11 +43,39 @@ function Login({ navigation }) {
         }
     }
 
+    function _setUserProperty() {
+        const propArr = [
+            {
+                "User type": getRandomBool() ? "Free" : "Premium"
+            },
+            {
+                "Interests": interests[getRandomInt(2)]
+            },
+            {
+                "Language": languages[getRandomInt(3)]
+            },
+            {
+                "Install Source": installSource[getRandomInt(2)]
+            },
+            {
+                "Gender": getRandomBool() ? "Male" : "Female"
+            },
+            {
+                "Age category": ageCategory[getRandomInt(5)]
+            }
+        ]
+
+        userProp = propArr[getRandomInt(5)]
+        key = Object.keys(userProp)[0]
+        setUserPropertyValue(key, userProp[key])
+    }
+
     function _login() {
         Keyboard.dismiss();
         setShowSpinner(true);
         setTimeout(() => {
             _setUserIdentity();
+            _setUserProperty();
             setShowSpinner(false);
             signIn('token'); //save token and change stack to logged in
         }, 2000);
