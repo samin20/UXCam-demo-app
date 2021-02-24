@@ -40,7 +40,7 @@ Logs custom events on current session.
 | ContactDetail.js | 34, 42, 46, 55 |
 | EditProfile.js | 19 |
 | ChatDetail.js | 49 |
-| Register.js | 56 |
+| Register.js | 55 |
 | PrivateMessage.js | 19 |
 ##### Screen tagging
 Tags screen after navigation change. Uses react-navigation's **onStateChange** method to detect and get route name.

@@ -5891,10 +5891,10 @@ react-native-screens@^2.8.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.8.0.tgz#9f989096fc5ccf248e0dfa93a74f1a64057e15f1"
   integrity sha512-fUCIQLZX+5XB0ypWX038P3zso54IFFjTsQUZJWEsjC3pp5rPItAt5SzqtJn+uVjcJaczZ+dpIuvj6IFLqkWLZQ==
 
-react-native-ux-cam@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-ux-cam/-/react-native-ux-cam-5.2.0.tgz#81c9b9d233dd019f372bf665c398342fe5f4a36d"
-  integrity sha512-18iHV52ZfhIHm7JXNUVZxEGfapEyU1YYDsE6rceImKf0Y9dodmWihmV7BVxIM0sgkKFJqqcv1iASkBbGaQvKzQ==
+react-native-ux-cam@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-ux-cam/-/react-native-ux-cam-5.3.2.tgz#d18b637265198d95a445aaa48f4bb2e87291a438"
+  integrity sha512-FESYv/ofH1VNrV3aP5Umxn7mql0lfXi+8r0gzfZl/+o/ZA6TogKRt38zK6HcbV3l60VwIv2ESG7j2hxfeersiw==
 
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
