@@ -39,7 +39,7 @@ Logs custom events on current session.
 |----------|---------|
 | ContactDetail.js | 34, 42, 46, 55 |
 | EditProfile.js | 20 |
-| ChatDetail.js | 46 |
+| ChatDetail.js | 49 |
 | Register.js | 56 |
 | PrivateMessage.js | 19 |
 ##### Screen tagging

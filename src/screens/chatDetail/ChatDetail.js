@@ -23,7 +23,7 @@ export default function ChatDetail({ route }) {
 
     const [totalMsgSent, setTotalMsgSent] = useState(0);
 
-    useEffect(() => {
+    useEffect(()=>{
         setConversation([
             { id: 0, userID: 0, text: 'Hello', time: '10:22 PM', sent: true, isRead: true },
             { id: 1, userID: 1, text: 'Hi!', time: '10:22 PM', sent: true, isRead: true },
@@ -37,6 +37,9 @@ export default function ChatDetail({ route }) {
             { id: 9, userID: 1, text: 'Preety sure it is false', time: '10:22 PM', sent: true, isRead: true },
             { id: 10, userID: 0, text: 'Hmmm...', time: '10:22 PM', sent: true, isRead: true }
         ])
+    }, [])
+
+    useEffect(() => {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
         //clear listener on component unmount
@@ -62,14 +65,16 @@ export default function ChatDetail({ route }) {
     function _send() {
         if (myText.trim() === '') { return }
         Keyboard.dismiss();
-        let arr = conversation;
-        arr.push({
-            id: Math.random() * (200 - 11) + 11, userID: 1,
+        const arr = {
+            id: Math.random() * (200 - 11) + 11,
+            userID: 1,
             text: myText,
             time: new Date().toLocaleTimeString(),
             sent: true,
             isRead: false
-        })
+        };
+        setConversation([...conversation,...[arr]])
+        
         setMyText('');
         flatListRef.current.scrollToEnd({ animated: true });
         setTotalMsgSent(totalMsgSent + 1);

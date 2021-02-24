@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     FlatList
@@ -19,11 +19,12 @@ function Home({ navigation }) {
     const names = ['John Doe', 'Anonymous', 'Foo Bar', 'John Appleseed', 'Android'];
     const texts = ['How r u?', 'Dinner at 8', 'Will be late for meeting', 'O Brother where art thou?']
 
-    const conversations = [];
+    const [conversations, setConversations] = useState([]);
 
     useEffect(() => {
+        let tempConv = [];
         for (let i = 0; i < 15; i++) {
-            conversations.push({
+            tempConv.push({
                 id: String(i),
                 image: images[getRandomInt(4)],
                 name: names[getRandomInt(5)],
@@ -32,6 +33,7 @@ function Home({ navigation }) {
                 isRead: getRandomBool()
             })
         }
+        setConversations(tempConv);
     }, []) //Only runs once at component mount
 
     function _goToDetail(item){
@@ -47,6 +49,7 @@ function Home({ navigation }) {
             <FlatList
                 data={conversations}
                 renderItem={({ item }) => {
+                    console.logI=("should render")
                     return (
                         <ConversationItem
                             onPress={()=>_goToDetail(item)}
