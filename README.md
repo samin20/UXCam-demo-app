@@ -38,7 +38,7 @@ Logs custom events on current session.
 | Filename | line no.|
 |----------|---------|
 | ContactDetail.js | 34, 42, 46, 55 |
-| EditProfile.js | 20 |
+| EditProfile.js | 19 |
 | ChatDetail.js | 49 |
 | Register.js | 56 |
 | PrivateMessage.js | 19 |

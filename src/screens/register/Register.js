@@ -5,10 +5,9 @@ import {
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MyColors } from '../../config/theme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, TextInput, Button, Caption } from 'react-native-paper';
 import { commonStyles } from '../commonStyles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { showToast, getRandomBool, getRandomInt } from '../../helpers';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { hideSensitiveView, allowShowBreak, logEvent } from '../../helpers/uxcamHelper';
@@ -82,7 +81,7 @@ function Register({ navigation }) {
             <Spinner
                 visible={showSpinner}
             />
-            <KeyboardAwareScrollView
+            <ScrollView
                 keyboardShouldPersistTaps='handled'
             >
                 <View style={{ flex: 1, padding: 20 }}>
@@ -183,7 +182,7 @@ function Register({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </KeyboardAwareScrollView>
+            </ScrollView>
         </SafeAreaView>
     );
 }
