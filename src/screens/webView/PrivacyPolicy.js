@@ -11,6 +11,7 @@ export default function PrivacyPolicy() {
         <SafeAreaView
             style={{ backgroundColor: 'white', flex: 1 }}>
             <WebView
+                androidHardwareAccelerationDisabled={true}
                 source={{ uri: 'https://help.uxcam.com/hc/en-us/articles/360004158171' }}
             />
         </SafeAreaView>
