@@ -33,6 +33,12 @@ RNUxcam.optIntoSchematicRecordings();
 // required when using react-native-screens or native navigation
 RNUxcam.setAutomaticScreenNameTagging(false);
 
+/*
+  disable advanced gestures if you're having issues with
+  swipe gestures and touches during app interaction
+*/
+// RNUxcam.enableAdvancedGestureRecognizers(false);
+
 //RNUxcam.startWithKey() methods goes here
 //For this demo app, session starts from Login.js
 

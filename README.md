@@ -46,7 +46,7 @@ Logs custom events on current session.
 Tags screen after navigation change. Uses react-navigation's **onStateChange** method to detect and get route name.
 | Filename | line no.|
 |----------|---------|
-| App.js | 98 |
+| App.js | 111 |
 ##### Occlude sensitive screen
 Occudes screen with sensitive information from capturing.
 | Filename | line no.|
